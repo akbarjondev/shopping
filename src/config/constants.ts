@@ -9,10 +9,10 @@ export const USER = {
 
 export const PRODUCTS = [
   {
-    name: "Italy pizza",
+    name: "Italian pizza",
     price: 11,
     description: "Pizza with tomato, mozzarella, and basil",
-    image: "italy-pizza.png",
+    image: "italian-pizza.png",
   },
   {
     name: "Combo plate",

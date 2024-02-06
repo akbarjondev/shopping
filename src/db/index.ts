@@ -20,6 +20,7 @@ export interface ICart {
   product_id: number;
   quantity: number;
   user_id: number;
+  closed?: 1 | 0;
 }
 
 export interface ICheckout {
@@ -48,7 +49,7 @@ export class AppDatabase extends Dexie {
     this.version(1).stores({
       shopping_config: "++id, tax, shipping",
       products: "++id, name, price, description, image",
-      cart: "++id, product_id, quantity, user_id",
+      cart: "++id, product_id, quantity, user_id, closed",
       checkout: "++id, user_id, total, date",
       sold_products: "++id, product_id, quantity, checkout_id",
     });

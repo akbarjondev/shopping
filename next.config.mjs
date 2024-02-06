@@ -6,7 +6,7 @@ const withBundleAnalyzer = BundleAnalyzer({
 });
 
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   images: {
     remotePatterns: [
       {
