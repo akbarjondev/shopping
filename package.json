@@ -8,9 +8,11 @@
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky install",
-    "typescript": "tsc --noEmit"
+    "typescript": "tsc --noEmit",
+    "analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^14.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "dexie": "^3.2.4",

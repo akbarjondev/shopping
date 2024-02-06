@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "@/styles/globals.css";
 import { Header } from "@/components/Header/Header";
 import { cn } from "@/lib/utils";
+import { IDBProvider } from "@/providers/idb";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["500", "600"] });
 
@@ -19,8 +20,10 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={cn(poppins.className, "mt-14")}>
-        <Header />
-        {children}
+        <IDBProvider>
+          <Header />
+          {children}
+        </IDBProvider>
       </body>
     </html>
   );

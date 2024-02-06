@@ -12,6 +12,7 @@ export interface IProduct {
   name: string;
   price: number;
   description: string;
+  image: string;
 }
 
 export interface ICart {
@@ -46,7 +47,7 @@ export class AppDatabase extends Dexie {
     super(DB_NAME);
     this.version(1).stores({
       shopping_config: "++id, tax, shipping",
-      products: "++id, name, price, description",
+      products: "++id, name, price, description, image",
       cart: "++id, product_id, quantity, user_id",
       checkout: "++id, user_id, total, date",
       sold_products: "++id, product_id, quantity, checkout_id",
@@ -55,42 +56,3 @@ export class AppDatabase extends Dexie {
 }
 
 export const db = new AppDatabase();
-
-// shopping_config
-/**
- * id
- * tax
- * shipping
- */
-
-// products
-/**
- * id
- * name
- * price
- * description
- */
-
-// cart
-/**
- * id
- * product_id
- * quantity
- * user_id
- */
-
-// checkout
-/**
- * id
- * user_id
- * total
- * date
- */
-
-// sold_products
-/**
- * id
- * product_id
- * quantity
- * checkout_id
- */
