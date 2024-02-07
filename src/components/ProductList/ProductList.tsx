@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "@/db";
 
-export const List = () => {
+export const ProductList = () => {
   const user = useUser();
   const { toast } = useToast();
 
@@ -45,7 +45,10 @@ export const List = () => {
   );
 
   return (
-    <div className="grid justify-items-center gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+    <div
+      data-testid="cards"
+      className="grid justify-items-center gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+    >
       {!products && <p>Loading...</p>}
       {products &&
         products.length > 0 &&
