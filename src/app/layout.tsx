@@ -5,6 +5,7 @@ import { Header } from "@/components/Header/Header";
 import { cn } from "@/lib/utils";
 import { IDBProvider } from "@/providers/idb";
 import { Toaster } from "@/components/ui/toaster";
+import { ReactNode } from "react";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["500", "600"] });
 
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en">

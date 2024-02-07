@@ -18,6 +18,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "@/db";
 import { ArrowRight } from "lucide-react";
 import { toast } from "../ui/use-toast";
+import { ToastClose } from "@radix-ui/react-toast";
 
 const nunito = Nunito({ weight: ["400", "500"], subsets: ["latin"] });
 
@@ -105,9 +106,10 @@ export const CardDetails = ({
       await Promise.all(createOrderPromises);
 
       toast({
-        title: "Success",
-        description: "Your order has been placed",
-        duration: 5000,
+        title: "Great! Your order has been placed",
+        description: `Do you want to save your card (...${data.cardNumber.slice(12)}) details for future purchases?`,
+        duration: 10000,
+        action: <ToastClose>Yes</ToastClose>,
       });
     } catch (error) {
       toast({
