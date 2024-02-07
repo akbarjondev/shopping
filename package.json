@@ -10,7 +10,8 @@
     "prepare": "husky install",
     "typescript": "tsc --noEmit",
     "analyze": "ANALYZE=true npm run build",
-    "test": "vitest"
+    "test": "vitest",
+    "test:run": "vitest run"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",

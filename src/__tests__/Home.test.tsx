@@ -25,6 +25,6 @@ describe("Home page", () => {
   });
 
   it("should render a loading message", () => {
-    expect(screen.getByText("Loading...")).toBeDefined();
+    expect(screen.getByText("1Loading...")).toBeDefined();
   });
 });
