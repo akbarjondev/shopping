@@ -27,6 +27,7 @@ const config = {
         primary: {
           main: "#565ABB",
           green: "#4DE1C1",
+          black: "#1E1E1E",
         },
       },
       keyframes: {
