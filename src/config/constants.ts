@@ -1,9 +1,9 @@
-import { User } from "@/types";
+import { UserType } from "@/types";
 
 export const DB_NAME = "shop";
 
 // temporary data
-export const USER: User = {
+export const USER: UserType = {
   id: 123,
   name: "John Doe",
   avatar: "https://i.pravatar.cc/150?img=60",
@@ -27,5 +27,20 @@ export const PRODUCTS = [
     price: 30,
     description: "Rice with tomato, mozzarella, and mushrooms",
     image: "spanish-risotto.png",
+  },
+];
+
+export const CARD_TYPES = [
+  {
+    name: "Visa",
+    image: "visa.png",
+  },
+  {
+    name: "Mastercard",
+    image: "master-card.png",
+  },
+  {
+    name: "Rupay",
+    image: "ru-pay.png",
   },
 ];

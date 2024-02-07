@@ -6,4 +6,25 @@
   .link {
     @apply hover:text-pink-600 transition-all inline-flex items-center gap-1;
   }
+
+  .input-wrapper {
+    @apply flex flex-col mb-[14px] relative;
+  }
+
+  .input {
+    @apply rounded-[6px] bg-primary-input text-primary-light text-xs font-medium px-[18px] py-[11px];
+    @apply focus:outline-none focus:ring-1 focus:ring-primary-green focus:ring-opacity-50;
+  }
+
+  .label {
+    @apply text-base leading-[22px] font-normal text-white mb-1;
+  }
+
+  .error-message {
+    @apply ring-1 ring-red-500;
+  }
+
+  .error-message-bottom {
+    @apply text-red-500 text-xs absolute top-full;
+  }
 }

@@ -28,6 +28,8 @@ const config = {
           main: "#565ABB",
           green: "#4DE1C1",
           black: "#1E1E1E",
+          input: "rgba(98, 104, 198, 1)",
+          light: "rgba(196, 196, 196, 1)",
         },
       },
       keyframes: {

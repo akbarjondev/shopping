@@ -46,6 +46,7 @@ export const List = () => {
 
   return (
     <div className="grid justify-items-center gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+      {!products && <p>Loading...</p>}
       {products &&
         products.length > 0 &&
         products.map((product) => (

@@ -56,7 +56,7 @@ export const Basket = () => {
       </div>
       {selectedProducts && selectedProducts.length > 0 && (
         <CardDetails
-          className="max-w-[388px] grow"
+          className="max-w-[388px] grow w-full"
           selectedProducts={selectedProducts}
           user={user}
         />
