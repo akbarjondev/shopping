@@ -9,6 +9,9 @@ import { Nunito } from "next/font/google";
 import { CARD_TYPES } from "@/config/constants";
 import Image from "next/image";
 import { Button } from "../ui/button";
+import { useLiveQuery } from "dexie-react-hooks";
+import { db } from "@/db";
+import { ArrowRight } from "lucide-react";
 
 const nunito = Nunito({ weight: ["400", "500"], subsets: ["latin"] });
 
@@ -32,6 +35,29 @@ export const CardDetails = ({
   user,
   className,
 }: CardDetailsProps) => {
+  const [shopConfig] =
+    useLiveQuery(() => db.shopping_config.toArray(), []) || [];
+
+  const tax = shopConfig?.tax || 0;
+  const shipping = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(shopConfig?.shipping || 0);
+  const accSubtotal = selectedProducts.reduce(
+    (acc, { product, quantity }) =>
+      product ? acc + product.price * quantity : acc,
+    0
+  );
+  const total = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format((accSubtotal + (shopConfig?.shipping || 0)) * (1 + tax));
+
+  const subtotal = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(accSubtotal);
+
   const {
     register,
     handleSubmit,
@@ -145,6 +171,30 @@ export const CardDetails = ({
             )}
           </div>
         </div>
+        <div className="h-px bg-[#5f65c3] w-full mt-3 mb-4" />
+        <div className="flex flex-col gap-[6px] mb-7">
+          <p className="text-white font-medium text-sm flex justify-between">
+            <span>Subtotal</span>
+            <span>{subtotal}</span>
+          </p>
+          <p className="text-white font-medium text-sm flex justify-between">
+            <span>Shipping</span>
+            <span>{shipping}</span>
+          </p>
+          <p className="text-white font-medium text-sm flex justify-between">
+            <span>Total (Tax incl.)</span>
+            <span>{total}</span>
+          </p>
+        </div>
+        <Button
+          type="submit"
+          className="flex justify-between items-center bg-primary-green w-full text-base rounded-xl px-6 py-[18px] font-medium h-auto"
+        >
+          {total}{" "}
+          <span className="flex items-center gap-2">
+            Checkout <ArrowRight />
+          </span>
+        </Button>
       </form>
     </div>
   );

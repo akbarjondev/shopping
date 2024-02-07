@@ -26,7 +26,7 @@ export const Basket = () => {
 
   const cartText =
     selectedProducts && selectedProducts.length > 0
-      ? selectedProducts.length === 1
+      ? allItems === 1
         ? "You have 1 item in your cart"
         : `You have ${allItems} items in your cart`
       : "Your shopping cart is empty";

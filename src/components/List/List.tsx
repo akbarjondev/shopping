@@ -63,7 +63,12 @@ export const List = () => {
             </CardHeader>
             <CardContent className="grow flex flex-col text-sm">
               <p>{product.description}</p>
-              <p>{product.price}</p>
+              <p className="my-2 text-lg">
+                {new Intl.NumberFormat("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                }).format(product.price)}
+              </p>
               <Button
                 className="self-end mt-auto"
                 onClick={() => {
