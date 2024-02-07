@@ -30,10 +30,9 @@ export interface ICheckout {
   date: Date;
 }
 
-export interface ISoldProducts {
+export interface IOrders {
   id?: number;
-  product_id: number;
-  quantity: number;
+  cart_id: number;
   checkout_id: number;
 }
 
@@ -42,7 +41,7 @@ export class AppDatabase extends Dexie {
   products!: Table<IProduct, number>;
   cart!: Table<ICart, number>;
   checkout!: Table<ICheckout, number>;
-  sold_products!: Table<ISoldProducts, number>;
+  orders!: Table<IOrders, number>;
 
   constructor() {
     super(DB_NAME);
@@ -51,7 +50,7 @@ export class AppDatabase extends Dexie {
       products: "++id, name, price, description, image",
       cart: "++id, product_id, quantity, user_id, closed",
       checkout: "++id, user_id, total, date",
-      sold_products: "++id, product_id, quantity, checkout_id",
+      orders: "++id, cart_id, checkout_id",
     });
   }
 }

@@ -34,7 +34,7 @@ export const deleteProductFromCart = async (id: number) => {
   return await db.cart.delete(id);
 };
 
-interface ICartWithProductPrice extends ICart {
+export interface ICartWithProductPrice extends ICart {
   product?: IProduct;
 }
 
