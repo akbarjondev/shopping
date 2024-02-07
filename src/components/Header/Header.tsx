@@ -4,10 +4,12 @@ import { ShoppingBag, ShoppingBasket } from "lucide-react";
 import Link from "next/link";
 import { User } from "../User/User";
 import { useLiveQuery } from "dexie-react-hooks";
-import { db } from "@/db";
+import { getCartsWithProductPrice } from "@/lib";
+import { useUser } from "@/hooks/useUser";
 
 export const Header = () => {
-  const cart = useLiveQuery(() => db.cart.toArray(), []);
+  const user = useUser();
+  const cart = useLiveQuery(() => getCartsWithProductPrice(user.id), []);
 
   let productsInCart = 0;
   if (cart && cart.length > 0) {

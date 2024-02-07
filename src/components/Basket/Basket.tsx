@@ -33,7 +33,7 @@ export const Basket = () => {
 
   return (
     <div className="flex gap-6 md:gap-14">
-      <div>
+      <div className="grow">
         <Link
           href={"/"}
           className="-ml-3 flex items-center font-semibold text-lg capitalize"

@@ -1,4 +1,9 @@
-import { ICartWithProductPrice } from "@/lib";
+import {
+  ICartWithProductPrice,
+  closeCart,
+  createCheckout,
+  createOrder,
+} from "@/lib";
 import { cn } from "@/lib/utils";
 import { UserType } from "@/types";
 import { User } from "../User/User";
@@ -12,6 +17,7 @@ import { Button } from "../ui/button";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "@/db";
 import { ArrowRight } from "lucide-react";
+import { toast } from "../ui/use-toast";
 
 const nunito = Nunito({ weight: ["400", "500"], subsets: ["latin"] });
 
@@ -48,10 +54,11 @@ export const CardDetails = ({
       product ? acc + product.price * quantity : acc,
     0
   );
+  const calcTotal = (accSubtotal + (shopConfig?.shipping || 0)) * (1 + tax);
   const total = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
-  }).format((accSubtotal + (shopConfig?.shipping || 0)) * (1 + tax));
+  }).format(calcTotal);
 
   const subtotal = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -73,8 +80,42 @@ export const CardDetails = ({
     },
   });
 
-  const onSubmit = (data: ValidationSchema) => {
-    console.log(data);
+  const onSubmit = async (data: ValidationSchema) => {
+    const cartsWillBeClosed = selectedProducts.map((cart) => {
+      return cart?.id && closeCart(cart.id);
+    });
+
+    try {
+      const [checkoutRes, ...cartsRes] = await Promise.all([
+        createCheckout({
+          user_id: user.id,
+          total: calcTotal,
+        }),
+        ...cartsWillBeClosed,
+      ]);
+
+      const createOrderPromises = cartsRes.map((cart) => {
+        if (cart && cart.cart_id && checkoutRes && checkoutRes.checkout_id) {
+          return createOrder({
+            checkout_id: checkoutRes.checkout_id,
+            cart_id: cart.cart_id,
+          });
+        }
+      });
+      await Promise.all(createOrderPromises);
+
+      toast({
+        title: "Success",
+        description: "Your order has been placed",
+        duration: 5000,
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was an error placing your order",
+        duration: 5000,
+      });
+    }
   };
 
   return (
